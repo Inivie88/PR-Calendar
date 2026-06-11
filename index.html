@@ -7,74 +7,35 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
   :root {
-    --bg: #ffffff;
-    --bg-secondary: #f7f7f5;
-    --bg-tertiary: #f0f0ed;
-    --text: #1a1a1a;
-    --text-secondary: #6b6b6b;
-    --text-tertiary: #a0a0a0;
-    --border: rgba(0,0,0,0.12);
-    --border-md: rgba(0,0,0,0.22);
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --navy: #1A1A2E;
-    --navy-dark: #0F0F1E;
-    --teal-bg: #E1F5EE;
-    --teal-text: #085041;
-    --teal-border: #5DCAA5;
-    --amber-bg: #FAEEDA;
-    --amber-text: #633806;
-    --red-bg: #FCEBEB;
-    --red-text: #791F1F;
-    --red-border: #F09595;
-    --wa: #25D366;
+    --bg: #ffffff; --bg-secondary: #f7f7f5; --bg-tertiary: #f0f0ed;
+    --text: #1a1a1a; --text-secondary: #6b6b6b; --text-tertiary: #a0a0a0;
+    --border: rgba(0,0,0,0.12); --border-md: rgba(0,0,0,0.22);
+    --radius-md: 8px; --radius-lg: 12px;
+    --navy: #1A1A2E; --navy-dark: #0F0F1E;
+    --teal-bg: #E1F5EE; --teal-text: #085041; --teal-border: #5DCAA5;
+    --amber-bg: #FAEEDA; --amber-text: #633806;
+    --red-bg: #FCEBEB; --red-text: #791F1F; --red-border: #F09595;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1c1c1e;
-      --bg-secondary: #2c2c2e;
-      --bg-tertiary: #3a3a3c;
-      --text: #f2f2f7;
-      --text-secondary: #aeaeb2;
-      --text-tertiary: #6c6c70;
-      --border: rgba(255,255,255,0.12);
-      --border-md: rgba(255,255,255,0.22);
-      --navy: #e2e2f0;
-      --navy-dark: #c8c8e0;
-      --teal-bg: #083428;
-      --teal-text: #9FE1CB;
-      --teal-border: #1D9E75;
-      --amber-bg: #412402;
-      --amber-text: #FAC775;
-      --red-bg: #501313;
-      --red-text: #F7C1C1;
-      --red-border: #A32D2D;
+      --bg: #1c1c1e; --bg-secondary: #2c2c2e; --bg-tertiary: #3a3a3c;
+      --text: #f2f2f7; --text-secondary: #aeaeb2; --text-tertiary: #6c6c70;
+      --border: rgba(255,255,255,0.12); --border-md: rgba(255,255,255,0.22);
+      --teal-bg: #083428; --teal-text: #9FE1CB; --teal-border: #1D9E75;
+      --amber-bg: #412402; --amber-text: #FAC775;
+      --red-bg: #501313; --red-text: #F7C1C1; --red-border: #A32D2D;
     }
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg-tertiary);
-    color: var(--text);
-    min-height: 100vh;
-  }
-  .page { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-tertiary); color: var(--text); min-height: 100vh; }
+  .page { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 12px; }
   .brand { font-size: 11px; color: var(--text-tertiary); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
   .page-title { font-size: 26px; font-weight: 600; color: var(--text); }
-  .btn-primary {
-    background: var(--navy); color: #fff; border: none; padding: 10px 20px;
-    border-radius: var(--radius-md); font-size: 14px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 7px; font-weight: 500;
-    transition: background .15s;
-  }
+  .btn-primary { background: var(--navy); color: #fff; border: none; padding: 10px 20px; border-radius: var(--radius-md); font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; font-weight: 500; transition: background .15s; }
   .btn-primary:hover { background: var(--navy-dark); }
   .tabs { display: flex; gap: 4px; border-bottom: 0.5px solid var(--border); margin-bottom: 1.75rem; }
-  .tab {
-    padding: 9px 18px; font-size: 13px; background: none; border: none; cursor: pointer;
-    color: var(--text-secondary); border-bottom: 2px solid transparent; margin-bottom: -0.5px;
-    display: inline-flex; align-items: center; gap: 6px; transition: color .15s;
-  }
+  .tab { padding: 9px 18px; font-size: 13px; background: none; border: none; cursor: pointer; color: var(--text-secondary); border-bottom: 2px solid transparent; margin-bottom: -0.5px; display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
   .tab.active { color: var(--text); border-bottom: 2px solid #1A1A2E; font-weight: 500; }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
@@ -86,27 +47,16 @@
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
   .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
   .nav { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
-  .nav-btn {
-    background: var(--bg); border: 0.5px solid var(--border); padding: 7px 14px;
-    border-radius: var(--radius-md); font-size: 13px; cursor: pointer; color: var(--text);
-    transition: background .15s;
-  }
+  .nav-btn { background: var(--bg); border: 0.5px solid var(--border); padding: 7px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; color: var(--text); transition: background .15s; }
   .nav-btn:hover { background: var(--bg-secondary); }
   .month-label { font-size: 15px; font-weight: 500; color: var(--text); flex: 1; text-align: center; }
   .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
   .day-header { font-size: 11px; color: var(--text-secondary); text-align: center; padding: 5px 0; font-weight: 500; }
-  .day-cell {
-    min-height: 80px; border: 0.5px solid var(--border); border-radius: var(--radius-md);
-    padding: 6px; background: var(--bg); cursor: default;
-  }
+  .day-cell { min-height: 80px; border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 6px; background: var(--bg); }
   .day-cell.other-month { background: var(--bg-tertiary); opacity: .5; }
   .day-cell.weekend { background: var(--bg-secondary); }
   .day-num { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; }
-  .event-chip {
-    font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-bottom: 2px;
-    cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    transition: opacity .12s;
-  }
+  .event-chip { font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-bottom: 2px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity .12s; }
   .event-chip:hover { opacity: .75; }
   .chip-confirmed { background: var(--teal-bg); color: var(--teal-text); }
   .chip-pending { background: var(--amber-bg); color: var(--amber-text); }
@@ -115,10 +65,7 @@
   .tag-confirmed { background: var(--teal-bg); color: var(--teal-text); }
   .tag-pending { background: var(--amber-bg); color: var(--amber-text); }
   .tag-rejected { background: var(--red-bg); color: var(--red-text); }
-  .request-card {
-    background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem; margin-bottom: 10px;
-  }
+  .request-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
   .rc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
   .rc-name { font-size: 15px; font-weight: 500; color: var(--text); }
   .rc-meta { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
@@ -126,83 +73,41 @@
   .rc-detail-item .lbl { color: var(--text-secondary); font-size: 11px; margin-bottom: 1px; }
   .rc-detail-item .val { color: var(--text); font-weight: 500; }
   .rc-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-  .btn-approve {
-    background: var(--teal-bg); color: var(--teal-text); border: 0.5px solid var(--teal-border);
-    padding: 7px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 5px; font-weight: 500; transition: opacity .12s;
-  }
+  .btn-approve { background: var(--teal-bg); color: var(--teal-text); border: 0.5px solid var(--teal-border); padding: 7px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-weight: 500; transition: opacity .12s; }
   .btn-approve:hover { opacity: .8; }
-  .btn-reject {
-    background: var(--red-bg); color: var(--red-text); border: 0.5px solid var(--red-border);
-    padding: 7px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 5px; font-weight: 500; transition: opacity .12s;
-  }
+  .btn-reject { background: var(--red-bg); color: var(--red-text); border: 0.5px solid var(--red-border); padding: 7px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-weight: 500; transition: opacity .12s; }
   .btn-reject:hover { opacity: .8; }
-  .btn-wa {
-    background: #1A1A2E; color: #fff; border: none; padding: 7px 14px;
-    border-radius: var(--radius-md); font-size: 13px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 5px; transition: background .15s;
-  }
-  .btn-wa:hover { background: #0F0F1E; }
+  .btn-wa { background: var(--navy); color: #fff; border: none; padding: 7px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: background .15s; }
+  .btn-wa:hover { background: var(--navy-dark); }
   .filter-row { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
-  .filter-btn {
-    background: transparent; border: 0.5px solid var(--border-md); padding: 5px 13px;
-    border-radius: var(--radius-md); font-size: 12px; cursor: pointer; color: var(--text-secondary);
-    transition: all .15s;
-  }
-  .filter-btn.active { background: #1A1A2E; color: #fff; border-color: #1A1A2E; }
+  .filter-btn { background: transparent; border: 0.5px solid var(--border-md); padding: 5px 13px; border-radius: var(--radius-md); font-size: 12px; cursor: pointer; color: var(--text-secondary); transition: all .15s; }
+  .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
   .empty { text-align: center; padding: 3rem 1rem; color: var(--text-secondary); font-size: 14px; }
   .divider { height: 0.5px; background: var(--border); margin: 1.5rem 0; }
-  .admin-pin-screen {
-    background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg);
-    padding: 2.5rem 2rem; max-width: 320px; margin: 0 auto; text-align: center;
-  }
   .section-label { font-size: 12px; font-weight: 500; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
-  .modal-overlay {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5);
-    z-index: 200; align-items: flex-start; justify-content: center; padding: 60px 16px;
-    overflow-y: auto;
-  }
+  .admin-pin-screen { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 2rem; max-width: 320px; margin: 0 auto; text-align: center; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200; align-items: flex-start; justify-content: center; padding: 60px 16px; overflow-y: auto; }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--bg); border-radius: var(--radius-lg); padding: 1.75rem;
-    width: min(480px, 100%); border: 0.5px solid var(--border); position: relative;
-  }
+  .modal { background: var(--bg); border-radius: var(--radius-lg); padding: 1.75rem; width: min(480px, 100%); border: 0.5px solid var(--border); position: relative; }
   .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 1.25rem; color: var(--text); }
   .field { margin-bottom: 14px; }
   .field label { font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 5px; }
-  .field input, .field select, .field textarea {
-    width: 100%; padding: 9px 11px; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-md); font-size: 14px; font-family: inherit;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color .15s;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus { border-color: #1A1A2E; }
+  .field input, .field select, .field textarea { width: 100%; padding: 9px 11px; border: 0.5px solid var(--border-md); border-radius: var(--radius-md); font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; transition: border-color .15s; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--navy); }
   .field textarea { resize: vertical; min-height: 80px; }
   .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem; }
-  .btn-cancel {
-    background: transparent; border: 0.5px solid var(--border-md); padding: 9px 18px;
-    border-radius: var(--radius-md); font-size: 13px; cursor: pointer; color: var(--text);
-    transition: background .15s;
-  }
+  .btn-cancel { background: transparent; border: 0.5px solid var(--border-md); padding: 9px 18px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; color: var(--text); transition: background .15s; }
   .btn-cancel:hover { background: var(--bg-secondary); }
-  .btn-submit {
-    background: #1A1A2E; color: #fff; border: none; padding: 9px 20px;
-    border-radius: var(--radius-md); font-size: 13px; cursor: pointer; font-weight: 500;
-    transition: background .15s;
-  }
-  .btn-submit:hover { background: #0F0F1E; }
+  .btn-submit { background: var(--navy); color: #fff; border: none; padding: 9px 20px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; font-weight: 500; transition: background .15s; }
+  .btn-submit:hover { background: var(--navy-dark); }
   .success-msg { display: none; text-align: center; padding: 1.5rem; }
   .detail-modal { background: var(--bg); border-radius: var(--radius-lg); padding: 1.75rem; width: min(400px, 100%); border: 0.5px solid var(--border); }
-  .wa-link {
-    display: inline-flex; align-items: center; gap: 6px; background: #25D366;
-    color: #fff; border: none; padding: 10px 18px; border-radius: var(--radius-md);
-    font-size: 13px; cursor: pointer; margin-top: 16px; text-decoration: none; font-weight: 500;
-  }
-  .close-btn {
-    position: absolute; top: 1rem; right: 1rem; background: none; border: none;
-    cursor: pointer; font-size: 20px; color: var(--text-secondary); line-height: 1;
-    padding: 4px;
-  }
+  .wa-link { display: inline-flex; align-items: center; gap: 6px; background: #25D366; color: #fff; border: none; padding: 10px 18px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer; margin-top: 16px; text-decoration: none; font-weight: 500; }
+  .close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; cursor: pointer; font-size: 22px; color: var(--text-secondary); line-height: 1; padding: 4px; }
+  .loading-bar { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 2rem; color: var(--text-secondary); font-size: 13px; }
+  .spinner { width: 18px; height: 18px; border: 2px solid var(--border-md); border-top-color: var(--navy); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .config-banner { background: var(--amber-bg); color: var(--amber-text); border: 0.5px solid #FAC775; border-radius: var(--radius-md); padding: .875rem 1rem; font-size: 13px; margin-bottom: 1.5rem; display: flex; gap: 10px; align-items: flex-start; }
   @media (max-width: 600px) {
     .cal-grid { gap: 2px; }
     .day-cell { min-height: 56px; padding: 4px; }
@@ -213,6 +118,19 @@
 </head>
 <body>
 <div class="page">
+
+  <!-- ⚙️ SETUP: Replace the value below with your deployed Apps Script URL -->
+  <script>
+    const SCRIPT_URL = https://script.google.com/macros/s/AKfycbzPc21PyKiU73b--nXRy1Ts3uhKIfeivhmj7plBBo1RPHYkYlGqmx3sXC87XLWBKdds/exec;
+  </script>
+
+  <div id="config-warning" class="config-banner" style="display:none">
+    <i class="ti ti-alert-triangle" style="font-size:18px;flex-shrink:0;margin-top:1px"></i>
+    <div>
+      <strong>Setup needed:</strong> Replace <code>YOUR_APPS_SCRIPT_URL_HERE</code> in this file with your deployed Google Apps Script URL.
+      See the setup guide for instructions.
+    </div>
+  </div>
 
   <div class="topbar">
     <div>
@@ -225,16 +143,12 @@
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('calendar',this)">
-      <i class="ti ti-calendar"></i> Calendar
-    </button>
+    <button class="tab active" onclick="switchTab('calendar',this)"><i class="ti ti-calendar"></i> Calendar</button>
     <button class="tab" onclick="switchTab('requests',this)">
       <i class="ti ti-inbox"></i> Requests
       <span id="pending-badge" style="background:var(--amber-bg);color:var(--amber-text);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:600"></span>
     </button>
-    <button class="tab" onclick="switchTab('admin',this)">
-      <i class="ti ti-lock"></i> Admin
-    </button>
+    <button class="tab" onclick="switchTab('admin',this)"><i class="ti ti-lock"></i> Admin</button>
   </div>
 
   <div class="tab-content active" id="tab-calendar">
@@ -248,7 +162,8 @@
       <span class="month-label" id="month-label"></span>
       <button class="nav-btn" onclick="nextMonth()"><i class="ti ti-chevron-right"></i></button>
     </div>
-    <div class="cal-grid" id="cal-grid">
+    <div id="cal-loading" class="loading-bar"><div class="spinner"></div> Loading schedule...</div>
+    <div class="cal-grid" id="cal-grid" style="display:none">
       <div class="day-header">Mon</div><div class="day-header">Tue</div>
       <div class="day-header">Wed</div><div class="day-header">Thu</div>
       <div class="day-header">Fri</div>
@@ -292,11 +207,23 @@
 <!-- Request Form Modal -->
 <div class="modal-overlay" id="form-overlay">
   <div class="modal">
-    <button class="close-btn" onclick="closeForm()" aria-label="Close">&times;</button>
+    <button class="close-btn" onclick="closeForm()">&times;</button>
     <div id="form-content">
       <div class="modal-title">Request a PR slot</div>
       <div class="field"><label>Your name</label><input type="text" id="f-name" placeholder="e.g. Budi Santoso"></div>
-      <div class="field"><label>Company / client</label><input type="text" id="f-client" placeholder="e.g. Potato Head Bali"></div>
+      <div class="field"><label>Category</label>
+        <select id="f-category" onchange="updateClientOptions()">
+          <option value="">Select category</option>
+          <option value="Accommodation">Accommodation</option>
+          <option value="Wonderspace">Wonderspace</option>
+          <option value="Club">Club</option>
+        </select>
+      </div>
+      <div class="field"><label>Client / property</label>
+        <select id="f-client" disabled>
+          <option value="">Select category first</option>
+        </select>
+      </div>
       <div class="field"><label>Event name</label><input type="text" id="f-event" placeholder="e.g. Sunset Session Launch"></div>
       <div class="field"><label>Event type</label>
         <select id="f-type">
@@ -310,7 +237,7 @@
       <div class="field"><label>Your WhatsApp number</label><input type="text" id="f-wa" placeholder="+62 8xx xxxx xxxx"></div>
       <div class="modal-actions">
         <button class="btn-cancel" onclick="closeForm()">Cancel</button>
-        <button class="btn-submit" onclick="submitForm()">Submit request</button>
+        <button class="btn-submit" id="submit-btn" onclick="submitForm()">Submit request</button>
       </div>
     </div>
     <div class="success-msg" id="success-msg">
@@ -329,20 +256,65 @@
 
 <script>
 const MNAMES=["January","February","March","April","May","June","July","August","September","October","November","December"];
-let curMonth=5,curYear=2026,filterState='all',adminUnlocked=false,nextId=8;
-
-let events=[
-  {id:1,date:"2026-06-19",name:"East Meets West: Botanical Sunset",client:"The Jungle Club Ubud",type:"Media launch",status:"confirmed",notes:"Roku Gin x Maker's Mark collab",requester:"Alex",wa:""},
-  {id:2,date:"2026-06-26",name:"Embers by the Sea",client:"Tropical Temptation x Nusa by Suka",type:"Brand collaboration",status:"confirmed",notes:"Melasti Beach",requester:"Alex",wa:""},
-  {id:3,date:"2026-06-27",name:"Tsune x Westin Hamabe Media Event",client:"Tsune / Westin Nusa Dua",type:"KOL event",status:"confirmed",notes:"",requester:"Alex",wa:""},
-  {id:4,date:"2026-07-10",name:"Tsune x Westin Main Event Day 1",client:"Tsune / Westin Nusa Dua",type:"Press dinner",status:"confirmed",notes:"",requester:"Alex",wa:""},
-  {id:5,date:"2026-07-11",name:"Tsune x Westin Main Event Day 2",client:"Tsune / Westin Nusa Dua",type:"Press dinner",status:"confirmed",notes:"",requester:"Alex",wa:""},
-  {id:6,date:"2026-07-18",name:"Nothing Wasted Zero-Waste Dinner",client:"Wonderspace x Balirca",type:"Product activation",status:"pending",notes:"Terra Verte Ubud",requester:"Dimas Raharja",wa:"+62 812 3456 7890"},
-  {id:7,date:"2026-08-02",name:"Sunset Rooftop Session",client:"Alaya Resort Ubud",type:"Media launch",status:"pending",notes:"Rooftop bar opening",requester:"Sari Dewi",wa:"+62 877 9988 1122"},
-];
+let curMonth=5,curYear=2026,filterState='all',adminUnlocked=false,allEvents=[];
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fmtDate(d){try{return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});}catch(e){return d;}}
+
+// Normalise any date value to "YYYY-MM-DD" string, robust to Sheets formats
+function normDate(d){
+  if(!d)return'';
+  // Already YYYY-MM-DD
+  if(typeof d==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(d))return d;
+  // Sheets sometimes returns "2026-6-19" (no zero-padding)
+  if(typeof d==='string'&&/^\d{4}-\d{1,2}-\d{1,2}$/.test(d)){
+    const [y,m,day]=d.split('-');
+    return `${y}-${m.padStart(2,'0')}-${day.padStart(2,'0')}`;
+  }
+  // Date object or ISO string
+  try{
+    const dt=new Date(d);
+    if(!isNaN(dt)){
+      const y=dt.getFullYear();
+      const m=String(dt.getMonth()+1).padStart(2,'0');
+      const day=String(dt.getDate()).padStart(2,'0');
+      return`${y}-${m}-${day}`;
+    }
+  }catch(e){}
+  return String(d);
+}
+
+function fmtDate(d){
+  const nd=normDate(d);
+  try{return new Date(nd+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});}
+  catch(e){return nd;}
+}
+
+function api(params){
+  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
+    document.getElementById('config-warning').style.display='flex';
+    return Promise.reject('Script URL not configured');
+  }
+  const url=SCRIPT_URL+'?'+Object.entries(params).map(([k,v])=>k+'='+encodeURIComponent(v)).join('&');
+  return fetch(url).then(r=>r.json());
+}
+
+function loadData(){
+  return api({action:'getAll'}).then(data=>{
+    allEvents=(data.bookings||[]).map(e=>({...e, date:normDate(e.date)}));
+    return allEvents;
+  });
+}
+
+function init(){
+  loadData().then(()=>{
+    document.getElementById('cal-loading').style.display='none';
+    document.getElementById('cal-grid').style.display='grid';
+    renderCal();
+    updatePendingBadge();
+  }).catch(()=>{
+    document.getElementById('cal-loading').innerHTML='<i class="ti ti-alert-circle" style="font-size:20px;color:var(--red-text)"></i> <span style="color:var(--text-secondary)">Could not connect to Google Sheets. Check your setup.</span>';
+  });
+}
 
 function switchTab(name,el){
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
@@ -354,14 +326,14 @@ function switchTab(name,el){
 }
 
 function updatePendingBadge(){
-  const n=events.filter(e=>e.status==='pending').length;
+  const n=allEvents.filter(e=>e.status==='pending').length;
   const b=document.getElementById('pending-badge');
   b.textContent=n>0?n:'';
 }
 
 function getEventsForDate(y,m,d){
   const k=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  return events.filter(e=>e.date===k);
+  return allEvents.filter(e=>normDate(e.date)===k);
 }
 
 function renderCal(){
@@ -372,43 +344,36 @@ function renderCal(){
   const offset=first===0?6:first-1;
   const days=new Date(curYear,curMonth+1,0).getDate();
   const prevDays=new Date(curYear,curMonth,0).getDate();
-  for(let i=0;i<offset;i++){
-    const c=document.createElement('div');c.className='day-cell other-month';
-    c.innerHTML=`<div class="day-num">${prevDays-offset+1+i}</div>`;grid.appendChild(c);
-  }
+  for(let i=0;i<offset;i++){const c=document.createElement('div');c.className='day-cell other-month';c.innerHTML=`<div class="day-num">${prevDays-offset+1+i}</div>`;grid.appendChild(c);}
   for(let d=1;d<=days;d++){
     const dow=(offset+d-1)%7;
     const cell=document.createElement('div');
     cell.className='day-cell'+(dow>=5?' weekend':'');
     const evts=getEventsForDate(curYear,curMonth+1,d);
-    cell.innerHTML=`<div class="day-num">${d}</div>`+evts.map(e=>`<div class="event-chip chip-${esc(e.status)}" onclick="showDetail(event,${e.id})" title="${esc(e.name)}">${esc(e.name)}</div>`).join('');
+    cell.innerHTML=`<div class="day-num">${d}</div>`+evts.map(e=>`<div class="event-chip chip-${esc(e.status)}" onclick="showDetail(event,'${esc(e.id)}')" title="${esc(e.name)}">${esc(e.name)}</div>`).join('');
     grid.appendChild(cell);
   }
   const rem=(7-(offset+days)%7)%7;
-  for(let i=1;i<=rem;i++){
-    const c=document.createElement('div');c.className='day-cell other-month';
-    c.innerHTML=`<div class="day-num">${i}</div>`;grid.appendChild(c);
-  }
+  for(let i=1;i<=rem;i++){const c=document.createElement('div');c.className='day-cell other-month';c.innerHTML=`<div class="day-num">${i}</div>`;grid.appendChild(c);}
 }
 function prevMonth(){if(curMonth===0){curMonth=11;curYear--;}else curMonth--;renderCal();}
 function nextMonth(){if(curMonth===11){curMonth=0;curYear++;}else curMonth++;renderCal();}
 
 function renderRequests(){
   const list=document.getElementById('requests-list');
-  const filtered=filterState==='all'?events:events.filter(e=>e.status===filterState);
+  const filtered=filterState==='all'?allEvents:allEvents.filter(e=>e.status===filterState);
   if(!filtered.length){list.innerHTML=`<div class="empty"><i class="ti ti-inbox" style="font-size:32px;display:block;margin-bottom:10px"></i>No ${filterState==='all'?'':filterState} requests yet</div>`;return;}
-  list.innerHTML=[...filtered].sort((a,b)=>a.date.localeCompare(b.date)).map(e=>cardHTML(e,false)).join('');
+  list.innerHTML=[...filtered].sort((a,b)=>String(a.date).localeCompare(String(b.date))).map(e=>cardHTML(e,false)).join('');
 }
 
 function cardHTML(e,isAdmin){
   const actions=isAdmin&&e.status==='pending'?
     `<div class="rc-actions">
-      <button class="btn-approve" onclick="approveEvt(${e.id})"><i class="ti ti-check"></i> Confirm</button>
-      <button class="btn-reject" onclick="rejectEvt(${e.id})"><i class="ti ti-x"></i> Reject</button>
-      ${e.wa?`<button class="btn-wa" onclick="notifyWA(${e.id})"><i class="ti ti-brand-whatsapp"></i> Notify</button>`:''}
-    </div>`:
-    (isAdmin&&e.wa?`<div class="rc-actions"><button class="btn-wa" onclick="notifyWA(${e.id})"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button></div>`:'');
-  return`<div class="request-card" id="rc-${e.id}">
+      <button class="btn-approve" onclick="approveEvt('${esc(e.id)}')"><i class="ti ti-check"></i> Confirm</button>
+      <button class="btn-reject" onclick="rejectEvt('${esc(e.id)}')"><i class="ti ti-x"></i> Reject</button>
+      ${e.wa?`<button class="btn-wa" onclick="notifyWA('${esc(e.id)}')"><i class="ti ti-brand-whatsapp"></i> Notify</button>`:''}
+    </div>`:'';
+  return`<div class="request-card" id="rc-${esc(e.id)}">
     <div class="rc-top">
       <div><div class="rc-name">${esc(e.name)}</div><div class="rc-meta">${esc(e.requester)}${e.wa?' &middot; '+esc(e.wa):''}</div></div>
       <span class="tag tag-${esc(e.status)}">${e.status==='confirmed'?'Confirmed':e.status==='rejected'?'Rejected':'Pending'}</span>
@@ -418,8 +383,7 @@ function cardHTML(e,isAdmin){
       <div class="rc-detail-item"><div class="lbl">Client</div><div class="val">${esc(e.client)}</div></div>
       <div class="rc-detail-item"><div class="lbl">Type</div><div class="val">${esc(e.type)}</div></div>
       ${e.notes?`<div class="rc-detail-item"><div class="lbl">Notes</div><div class="val">${esc(e.notes)}</div></div>`:''}
-    </div>
-    ${actions}
+    </div>${actions}
   </div>`;
 }
 
@@ -431,16 +395,20 @@ function setFilter(f,el){
 }
 
 function approveEvt(id){
-  const e=events.find(ev=>ev.id===id);if(e)e.status='confirmed';
-  renderCal();renderRequests();renderAdmin();updatePendingBadge();
+  api({action:'updateStatus',id,status:'confirmed'}).then(()=>{
+    const e=allEvents.find(ev=>String(ev.id)===String(id));if(e)e.status='confirmed';
+    renderCal();renderRequests();renderAdmin();updatePendingBadge();
+  });
 }
 function rejectEvt(id){
-  const e=events.find(ev=>ev.id===id);if(e)e.status='rejected';
-  renderCal();renderRequests();renderAdmin();updatePendingBadge();
+  api({action:'updateStatus',id,status:'rejected'}).then(()=>{
+    const e=allEvents.find(ev=>String(ev.id)===String(id));if(e)e.status='rejected';
+    renderCal();renderRequests();renderAdmin();updatePendingBadge();
+  });
 }
 function notifyWA(id){
-  const e=events.find(ev=>ev.id===id);if(!e||!e.wa)return;
-  const wa=e.wa.replace(/\D/g,'');
+  const e=allEvents.find(ev=>String(ev.id)===String(id));if(!e||!e.wa)return;
+  const wa=String(e.wa).replace(/\D/g,'');
   const msg=e.status==='confirmed'
     ?`Hi ${e.requester}, your PR slot request for *${e.name}* on ${fmtDate(e.date)} has been *confirmed*. Looking forward to working together! — Alex, INI VIE Hospitality`
     :e.status==='rejected'
@@ -451,14 +419,14 @@ function notifyWA(id){
 
 function renderAdmin(){
   if(!adminUnlocked)return;
-  const total=events.length,confirmed=events.filter(e=>e.status==='confirmed').length,
-        pending=events.filter(e=>e.status==='pending').length,rejected=events.filter(e=>e.status==='rejected').length;
+  const total=allEvents.length,confirmed=allEvents.filter(e=>e.status==='confirmed').length,
+        pending=allEvents.filter(e=>e.status==='pending').length,rejected=allEvents.filter(e=>e.status==='rejected').length;
   document.getElementById('stats-grid').innerHTML=`
     <div class="stat"><div class="stat-label">Total slots</div><div class="stat-val">${total}</div></div>
     <div class="stat"><div class="stat-label">Confirmed</div><div class="stat-val" style="color:var(--teal-text)">${confirmed}</div></div>
     <div class="stat"><div class="stat-label">Pending</div><div class="stat-val" style="color:var(--amber-text)">${pending}</div></div>
     <div class="stat"><div class="stat-label">Rejected</div><div class="stat-val" style="color:var(--red-text)">${rejected}</div></div>`;
-  const pendingEvts=events.filter(e=>e.status==='pending');
+  const pendingEvts=allEvents.filter(e=>e.status==='pending');
   document.getElementById('admin-pending-list').innerHTML=pendingEvts.length
     ?pendingEvts.map(e=>cardHTML(e,true)).join('')
     :`<div class="empty"><i class="ti ti-circle-check" style="font-size:32px;display:block;margin-bottom:10px;color:#1D9E75"></i>All caught up — no pending requests</div>`;
@@ -472,11 +440,56 @@ function checkPin(){
     renderAdmin();
   } else {
     document.getElementById('pin-input').value='';
-    document.getElementById('pin-input').placeholder='Wrong PIN — try again';
+    document.getElementById('pin-input').placeholder='Wrong PIN';
     document.getElementById('pin-input').style.borderColor='#E24B4A';
   }
 }
 document.getElementById('pin-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPin();});
+
+const CLIENT_OPTIONS = {
+  'Accommodation': [
+    'The Vinava Villa',
+    'Maar Resort Ubud',
+    'Astera Resort Canggu',
+    'Equipoise Resort Ubud',
+    'Other Accommodation',
+  ],
+  'Wonderspace': [
+    'Wonderspace Ubud',
+    'Terra Verte Ubud',
+    'Other Wonderspace',
+  ],
+  'Club': [
+    'The Jungle Club Ubud',
+    'Tropical Temptation Beach Club',
+    'Other Club',
+  ],
+};
+
+function updateClientOptions(){
+  const cat=document.getElementById('f-category').value;
+  const sel=document.getElementById('f-client');
+  sel.innerHTML='';
+  if(!cat){
+    sel.innerHTML='<option value="">Select category first</option>';
+    sel.disabled=true;
+    return;
+  }
+  sel.disabled=false;
+  sel.innerHTML='<option value="">Select client / property</option>';
+  (CLIENT_OPTIONS[cat]||[]).forEach(c=>{
+    const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);
+  });
+}
+
+function resetForm(){
+  ['f-name','f-event','f-notes','f-wa'].forEach(id=>{document.getElementById(id).value='';});
+  document.getElementById('f-type').value='';
+  document.getElementById('f-date').value='';
+  document.getElementById('f-category').value='';
+  document.getElementById('f-client').innerHTML='<option value="">Select category first</option>';
+  document.getElementById('f-client').disabled=true;
+}
 
 function openForm(){
   document.getElementById('form-overlay').classList.add('open');
@@ -487,26 +500,36 @@ function closeForm(){document.getElementById('form-overlay').classList.remove('o
 
 function submitForm(){
   const name=document.getElementById('f-name').value.trim();
-  const client=document.getElementById('f-client').value.trim();
+  const category=document.getElementById('f-category').value;
+  const client=document.getElementById('f-client').value;
   const eventName=document.getElementById('f-event').value.trim();
   const type=document.getElementById('f-type').value;
   const date=document.getElementById('f-date').value;
   const notes=document.getElementById('f-notes').value.trim();
   const wa=document.getElementById('f-wa').value.trim();
-  if(!name||!client||!eventName||!date){alert('Please fill in name, client, event name, and date.');return;}
-  events.push({id:nextId++,date,name:eventName,client,type:type||'Other',status:'pending',notes,requester:name,wa});
-  const msg=`*New PR Slot Request — INI VIE Hospitality*\n\nName: ${name}\nClient: ${client}\nEvent: ${eventName}\nType: ${type||'-'}\nDate: ${fmtDate(date)}\nNotes: ${notes||'-'}\nWA: ${wa||'-'}`;
-  window.open(`https://wa.me/6282118003294?text=${encodeURIComponent(msg)}`,'_blank');
-  document.getElementById('form-content').style.display='none';
-  document.getElementById('success-msg').style.display='block';
-  renderCal();updatePendingBadge();
-  ['f-name','f-client','f-event','f-notes','f-wa'].forEach(id=>{document.getElementById(id).value='';});
-  document.getElementById('f-type').value='';document.getElementById('f-date').value='';
+  if(!name||!category||!client||!eventName||!date){alert('Please fill in all required fields: name, category, client, event name, and date.');return;}
+  const clientFull=`[${category}] ${client}`;
+  const btn=document.getElementById('submit-btn');
+  btn.textContent='Saving...';btn.disabled=true;
+  api({action:'add',date,name:eventName,client:clientFull,type:type||'Other',notes,requester:name,wa})
+    .then(res=>{
+      if(res.success){
+        allEvents.push({id:res.id,date:normDate(date),name:eventName,client:clientFull,type:type||'Other',status:'pending',notes,requester:name,wa});
+        const msg=`*New PR Slot Request — INI VIE Hospitality*\n\nName: ${name}\nCategory: ${category}\nClient: ${client}\nEvent: ${eventName}\nType: ${type||'-'}\nDate: ${fmtDate(date)}\nNotes: ${notes||'-'}\nWA: ${wa||'-'}`;
+        window.open(`https://wa.me/6282118003294?text=${encodeURIComponent(msg)}`,'_blank');
+        document.getElementById('form-content').style.display='none';
+        document.getElementById('success-msg').style.display='block';
+        renderCal();updatePendingBadge();
+        resetForm();
+      }
+    })
+    .catch(()=>alert('Could not save. Check your internet connection and try again.'))
+    .finally(()=>{btn.textContent='Submit request';btn.disabled=false;});
 }
 
 function showDetail(e,id){
   e.stopPropagation();
-  const evt=events.find(ev=>ev.id===id);if(!evt)return;
+  const evt=allEvents.find(ev=>String(ev.id)===String(id));if(!evt)return;
   const msg=`Hi, I saw the *${evt.name}* slot on the INI VIE PR calendar. Can you share more details?`;
   document.getElementById('detail-card').innerHTML=`
     <button onclick="closeDetail()" style="float:right;background:none;border:none;cursor:pointer;font-size:22px;color:var(--text-secondary);line-height:1">&times;</button>
@@ -526,8 +549,7 @@ function closeDetail(){document.getElementById('detail-overlay').classList.remov
 document.getElementById('detail-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('detail-overlay'))closeDetail();});
 document.getElementById('form-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('form-overlay'))closeForm();});
 
-renderCal();
-updatePendingBadge();
+init();
 </script>
 </body>
 </html>
