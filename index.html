@@ -121,7 +121,7 @@
 
   <!-- ⚙️ SETUP: Replace the value below with your deployed Apps Script URL -->
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIbgkrYCG1mPESOHev4y53dvmKk1JFGnADX38mmDkHPbNar6BXUJ5u-I_m58T7iNIy/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQUDE9Zvb_ukZHgWsfdEFt5cIp0rPetrXup1uedm1fpCaXaa5iDQy9pd9fTRJqgopE/exec";
   </script>
 
   <div id="config-warning" class="config-banner" style="display:none">
@@ -212,16 +212,11 @@
       <div class="modal-title">Request a PR slot</div>
       <div class="field"><label>Your name</label><input type="text" id="f-name" placeholder="e.g. Budi Santoso"></div>
       <div class="field"><label>Category</label>
-        <select id="f-category" onchange="updateClientOptions()">
+        <select id="f-category">
           <option value="">Select category</option>
           <option value="Accommodation">Accommodation</option>
           <option value="Wonderspace">Wonderspace</option>
           <option value="Club">Club</option>
-        </select>
-      </div>
-      <div class="field"><label>Client / property</label>
-        <select id="f-client" disabled>
-          <option value="">Select category first</option>
         </select>
       </div>
       <div class="field"><label>Event name</label><input type="text" id="f-event" placeholder="e.g. Sunset Session Launch"></div>
@@ -232,8 +227,11 @@
           <option>Product activation</option><option>Brand collaboration</option><option>Other</option>
         </select>
       </div>
-      <div class="field"><label>Requested date</label><input type="date" id="f-date"></div>
-      <div class="field"><label>Details / notes</label><textarea id="f-notes" placeholder="Brief description, coverage needed, etc."></textarea></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field" style="margin-bottom:0"><label>Requested date</label><input type="date" id="f-date"></div>
+        <div class="field" style="margin-bottom:0"><label>Event time</label><input type="time" id="f-time"></div>
+      </div>
+      <div class="field" style="margin-top:14px"><label>Details / notes</label><textarea id="f-notes" placeholder="Brief description, coverage needed, etc."></textarea></div>
       <div class="field"><label>Your WhatsApp number</label><input type="text" id="f-wa" placeholder="+62 8xx xxxx xxxx"></div>
       <div class="modal-actions">
         <button class="btn-cancel" onclick="closeForm()">Cancel</button>
@@ -289,6 +287,17 @@ function fmtDate(d){
   catch(e){return nd;}
 }
 
+function fmtTime(t){
+  if(!t)return'';
+  try{
+    const [h,m]=t.split(':');
+    const hr=parseInt(h);
+    const ampm=hr>=12?'PM':'AM';
+    const hr12=hr%12||12;
+    return`${hr12}:${m} ${ampm}`;
+  }catch(e){return t;}
+}
+
 function api(params){
   return new Promise((resolve,reject)=>{
     const cbName='cb_'+Date.now();
@@ -312,7 +321,7 @@ function api(params){
 
 function loadData(){
   return api({action:'getAll'}).then(data=>{
-    allEvents=(data.bookings||[]).map(e=>({...e, date:normDate(e.date)}));
+    allEvents=(data.bookings||[]).map(e=>({...e, date:normDate(e.date), time:e.time||''}));
     return allEvents;
   });
 }
@@ -345,7 +354,7 @@ function updatePendingBadge(){
 
 function getEventsForDate(y,m,d){
   const k=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  return allEvents.filter(e=>normDate(e.date)===k);
+  return allEvents.filter(e=>normDate(e.date)===k && e.status!=='rejected');
 }
 
 function renderCal(){
@@ -362,7 +371,7 @@ function renderCal(){
     const cell=document.createElement('div');
     cell.className='day-cell'+(dow>=5?' weekend':'');
     const evts=getEventsForDate(curYear,curMonth+1,d);
-    cell.innerHTML=`<div class="day-num">${d}</div>`+evts.map(e=>`<div class="event-chip chip-${esc(e.status)}" onclick="showDetail(event,'${esc(e.id)}')" title="${esc(e.name)}">${esc(e.name)}</div>`).join('');
+    cell.innerHTML=`<div class="day-num">${d}</div>`+evts.map(e=>`<div class="event-chip chip-${esc(e.status)}" onclick="showDetail(event,'${esc(e.id)}')" title="${esc(e.name)}">${esc(e.name)}${e.time?' · '+esc(e.time):''}</div>`).join('');
     grid.appendChild(cell);
   }
   const rem=(7-(offset+days)%7)%7;
@@ -391,7 +400,7 @@ function cardHTML(e,isAdmin){
       <span class="tag tag-${esc(e.status)}">${e.status==='confirmed'?'Confirmed':e.status==='rejected'?'Rejected':'Pending'}</span>
     </div>
     <div class="rc-details">
-      <div class="rc-detail-item"><div class="lbl">Date</div><div class="val">${fmtDate(e.date)}</div></div>
+      <div class="rc-detail-item"><div class="lbl">Date</div><div class="val">${fmtDate(e.date)}${e.time?' · '+fmtTime(e.time):''}</div></div>
       <div class="rc-detail-item"><div class="lbl">Client</div><div class="val">${esc(e.client)}</div></div>
       <div class="rc-detail-item"><div class="lbl">Type</div><div class="val">${esc(e.type)}</div></div>
       ${e.notes?`<div class="rc-detail-item"><div class="lbl">Notes</div><div class="val">${esc(e.notes)}</div></div>`:''}
@@ -495,12 +504,9 @@ function updateClientOptions(){
 }
 
 function resetForm(){
-  ['f-name','f-event','f-notes','f-wa'].forEach(id=>{document.getElementById(id).value='';});
+  ['f-name','f-event','f-notes','f-wa','f-date','f-time'].forEach(id=>{document.getElementById(id).value='';});
   document.getElementById('f-type').value='';
-  document.getElementById('f-date').value='';
   document.getElementById('f-category').value='';
-  document.getElementById('f-client').innerHTML='<option value="">Select category first</option>';
-  document.getElementById('f-client').disabled=true;
 }
 
 function openForm(){
@@ -513,21 +519,21 @@ function closeForm(){document.getElementById('form-overlay').classList.remove('o
 function submitForm(){
   const name=document.getElementById('f-name').value.trim();
   const category=document.getElementById('f-category').value;
-  const client=document.getElementById('f-client').value;
   const eventName=document.getElementById('f-event').value.trim();
   const type=document.getElementById('f-type').value;
   const date=document.getElementById('f-date').value;
+  const time=document.getElementById('f-time').value;
   const notes=document.getElementById('f-notes').value.trim();
   const wa=document.getElementById('f-wa').value.trim();
-  if(!name||!category||!client||!eventName||!date){alert('Please fill in all required fields: name, category, client, event name, and date.');return;}
-  const clientFull=`[${category}] ${client}`;
+  if(!name||!category||!eventName||!date){alert('Please fill in all required fields: name, category, event name, and date.');return;}
+  const clientFull=`[${category}]`;
   const btn=document.getElementById('submit-btn');
   btn.textContent='Saving...';btn.disabled=true;
-  api({action:'add',date,name:eventName,client:clientFull,type:type||'Other',notes,requester:name,wa})
+  api({action:'add',date,time,name:eventName,client:clientFull,type:type||'Other',notes,requester:name,wa})
     .then(res=>{
       if(res.success){
-        allEvents.push({id:res.id,date:normDate(date),name:eventName,client:clientFull,type:type||'Other',status:'pending',notes,requester:name,wa});
-        const msg=`*New PR Slot Request — INI VIE Hospitality*\n\nName: ${name}\nCategory: ${category}\nClient: ${client}\nEvent: ${eventName}\nType: ${type||'-'}\nDate: ${fmtDate(date)}\nNotes: ${notes||'-'}\nWA: ${wa||'-'}`;
+        allEvents.push({id:res.id,date:normDate(date),time,name:eventName,client:clientFull,type:type||'Other',status:'pending',notes,requester:name,wa});
+        const msg=`*New PR Slot Request — INI VIE Hospitality*\n\nName: ${name}\nCategory: ${category}\nEvent: ${eventName}\nType: ${type||'-'}\nDate: ${fmtDate(date)}${time?' at '+fmtTime(time):''}\nNotes: ${notes||'-'}\nWA: ${wa||'-'}`;
         window.open(`https://wa.me/6282118003294?text=${encodeURIComponent(msg)}`,'_blank');
         document.getElementById('form-content').style.display='none';
         document.getElementById('success-msg').style.display='block';
@@ -548,7 +554,7 @@ function showDetail(e,id){
     <div style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text);padding-right:24px">${esc(evt.name)}</div>
     <span class="tag tag-${esc(evt.status)}" style="margin-bottom:14px;display:inline-block">${evt.status==='confirmed'?'Confirmed':evt.status==='rejected'?'Rejected':'Pending approval'}</span>
     <div style="font-size:13px;display:grid;gap:10px;margin-top:6px">
-      <div style="display:flex;gap:10px"><span style="color:var(--text-secondary);min-width:65px">Date</span><span style="font-weight:500;color:var(--text)">${fmtDate(evt.date)}</span></div>
+      <div style="display:flex;gap:10px"><span style="color:var(--text-secondary);min-width:65px">Date</span><span style="font-weight:500;color:var(--text)">${fmtDate(evt.date)}${evt.time?' · '+fmtTime(evt.time):''}</span></div>
       <div style="display:flex;gap:10px"><span style="color:var(--text-secondary);min-width:65px">Client</span><span style="font-weight:500;color:var(--text)">${esc(evt.client)}</span></div>
       <div style="display:flex;gap:10px"><span style="color:var(--text-secondary);min-width:65px">Type</span><span style="font-weight:500;color:var(--text)">${esc(evt.type)}</span></div>
       ${evt.notes?`<div style="display:flex;gap:10px"><span style="color:var(--text-secondary);min-width:65px">Notes</span><span style="font-weight:500;color:var(--text)">${esc(evt.notes)}</span></div>`:''}
