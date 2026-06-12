@@ -121,7 +121,7 @@
 
   <!-- ⚙️ SETUP: Replace the value below with your deployed Apps Script URL -->
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQUDE9Zvb_ukZHgWsfdEFt5cIp0rPetrXup1uedm1fpCaXaa5iDQy9pd9fTRJqgopE/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkTUs3cqCm61j61zr1k-liFt2HEtrcylXw5ONp6iIVxW3P1lKX1M5tvSV1UWca8d-l/exec";
   </script>
 
   <div id="config-warning" class="config-banner" style="display:none">
@@ -290,12 +290,24 @@ function fmtDate(d){
 function fmtTime(t){
   if(!t)return'';
   try{
-    const [h,m]=t.split(':');
+    // Handle Google Sheets date serial (1899-12-30T...) 
+    if(typeof t==='string'&&t.includes('T')){
+      const d=new Date(t);
+      if(!isNaN(d)){
+        const h=d.getUTCHours();
+        const m=String(d.getUTCMinutes()).padStart(2,'0');
+        const ampm=h>=12?'PM':'AM';
+        const hr12=h%12||12;
+        return`${hr12}:${m} ${ampm}`;
+      }
+    }
+    // Handle HH:MM string
+    const [h,m]=String(t).split(':');
     const hr=parseInt(h);
     const ampm=hr>=12?'PM':'AM';
     const hr12=hr%12||12;
     return`${hr12}:${m} ${ampm}`;
-  }catch(e){return t;}
+  }catch(e){return'';}
 }
 
 function api(params){
