@@ -290,23 +290,29 @@ function fmtDate(d){
 function fmtTime(t){
   if(!t)return'';
   try{
-    // Handle Google Sheets date serial (1899-12-30T...) 
-    if(typeof t==='string'&&t.includes('T')){
-      const d=new Date(t);
-      if(!isNaN(d)){
-        const h=d.getUTCHours();
-        const m=String(d.getUTCMinutes()).padStart(2,'0');
-        const ampm=h>=12?'PM':'AM';
-        const hr12=h%12||12;
-        return`${hr12}:${m} ${ampm}`;
-      }
+    let hr, mn;
+    const s = String(t);
+    // "Sat Dec 30 1899 11:00:00 GMT+0757 ..." — parse local time from toString
+    const localMatch = s.match(/(\d{1,2}):(\d{2}):(\d{2})/);
+    if(localMatch){
+      hr = parseInt(localMatch[1]);
+      mn = localMatch[2];
+    } else if(s.includes('T')){
+      // ISO string — use UTC hours
+      const d = new Date(s);
+      hr = d.getUTCHours();
+      mn = String(d.getUTCMinutes()).padStart(2,'0');
+    } else if(s.includes(':')){
+      // Plain HH:MM
+      const parts = s.split(':');
+      hr = parseInt(parts[0]);
+      mn = parts[1].substring(0,2);
+    } else {
+      return '';
     }
-    // Handle HH:MM string
-    const [h,m]=String(t).split(':');
-    const hr=parseInt(h);
-    const ampm=hr>=12?'PM':'AM';
-    const hr12=hr%12||12;
-    return`${hr12}:${m} ${ampm}`;
+    const ampm = hr>=12?'PM':'AM';
+    const hr12 = hr%12||12;
+    return`${hr12}:${mn} ${ampm}`;
   }catch(e){return'';}
 }
 
@@ -383,7 +389,7 @@ function renderCal(){
     const cell=document.createElement('div');
     cell.className='day-cell'+(dow>=5?' weekend':'');
     const evts=getEventsForDate(curYear,curMonth+1,d);
-    cell.innerHTML=`<div class="day-num">${d}</div>`+evts.map(e=>`<div class="event-chip chip-${esc(e.status)}" onclick="showDetail(event,'${esc(e.id)}')" title="${esc(e.name)}">${esc(e.name)}${e.time?' · '+esc(e.time):''}</div>`).join('');
+    cell.innerHTML=`<div class="day-num">${d}</div>`+evts.map(e=>`<div class="event-chip chip-${esc(e.status)}" onclick="showDetail(event,'${esc(e.id)}')" title="${esc(e.name)}">${esc(e.name)}${e.time?' · '+fmtTime(e.time):''}</div>`).join('');
     grid.appendChild(cell);
   }
   const rem=(7-(offset+days)%7)%7;
