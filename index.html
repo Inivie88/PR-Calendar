@@ -121,7 +121,7 @@
 
   <!-- ⚙️ SETUP: Replace the value below with your deployed Apps Script URL -->
   <script>
-    const SCRIPT_URL = https://script.google.com/macros/s/AKfycbzgVc0nCDapQTdMA2BnUA6aCPb9b3DvsNDEvjeHAfWN3c3fIZglLebPmkKKuN8I1xk/exec
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0_O0rwEx6Ilt5TSDOFVUArfAb6lC7cjQz82Rd44ProBhpwj1m2u238LqQbKnPCrSs/exec";
   </script>
 
   <div id="config-warning" class="config-banner" style="display:none">
@@ -290,12 +290,24 @@ function fmtDate(d){
 }
 
 function api(params){
-  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
-    document.getElementById('config-warning').style.display='flex';
-    return Promise.reject('Script URL not configured');
-  }
-  const url=SCRIPT_URL+'?'+Object.entries(params).map(([k,v])=>k+'='+encodeURIComponent(v)).join('&');
-  return fetch(url).then(r=>r.json());
+  return new Promise((resolve,reject)=>{
+    const cbName='cb_'+Date.now();
+    params.callback=cbName;
+    const url=SCRIPT_URL+'?'+Object.entries(params).map(([k,v])=>k+'='+encodeURIComponent(v)).join('&');
+    const script=document.createElement('script');
+    script.src=url;
+    window[cbName]=function(data){
+      delete window[cbName];
+      if(document.body.contains(script))document.body.removeChild(script);
+      resolve(data);
+    };
+    script.onerror=function(){
+      delete window[cbName];
+      if(document.body.contains(script))document.body.removeChild(script);
+      reject(new Error('Request failed'));
+    };
+    document.body.appendChild(script);
+  });
 }
 
 function loadData(){
